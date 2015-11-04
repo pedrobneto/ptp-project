@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
-
+// cor mínima possível
+#define min 0
 // cabeçalho do arquivo ppm
 #define cab "P3"
 
@@ -10,10 +11,39 @@ typedef struct {
 } Cores;
 // largura, altura, cor máxima do arquivo ppm
 int lar, alt, c_max;
+// iteradores
+int i, j;
+
+void cria_imagem (Cores img[lar][alt], char saida[]){
+	strcat(saida, "-saida.ppm");
+	FILE * imagem;
+	
+	imagem = fopen(saida, "w");
+	
+	fprintf(imagem, "%s\n%i %i\n%i\n", cab, lar, alt, c_max);
+	for(i = 0; i < lar; i++)
+		for(j = 0; j < alt; j++)
+			fprintf(imagem, "%i %i %i\n", img[i][j].r, img[i][j].g, img[i][j].b);
+	
+	fclose(imagem);
+}
+
+void binarizar (Cores img[lar][alt]) {
+	int media;
+	for(i = 0; i < lar; i++)
+		for(j = 0; j < alt; j++) {
+			media = (img[i][j].r + img[i][j].g + img[i][j].b) / 3;
+			if(media < c_max / 2)
+				media = min;
+			else
+				media = c_max;
+			img[i][j].r = media,
+			img[i][j].g = media,
+			img[i][j].b = media;
+		}
+}
 
 int main() {
-    // iteradores
-	int i, j;
     // nome do arquivo sem extensão e nome do arquivo com extensão
     char arq[50], arq_ext[50];
     // lê o nome do arquivo
@@ -46,6 +76,8 @@ int main() {
 			fscanf(arq_img, "%i %i %i", &img[i][j].r, &img[i][j].g, &img[i][j].b);
     // fecha o arquivo
 	fclose(arq_img);
-
+	printf("VOCE TEM Q BINARIZAR ESSA IMAGEM CARA!!!!\n");
+	binarizar(img);
+	cria_imagem(img, arq);
     return 0;
 }
