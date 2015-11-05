@@ -13,7 +13,7 @@ typedef struct {
 int lar, alt, c_max;
 // iteradores
 int i, j;
-
+//funçao para criar o arquivo ppm alterado
 void cria_imagem (Cores img[lar][alt], char saida[]){
 	strcat(saida, "-saida.ppm");
 	FILE * imagem;
