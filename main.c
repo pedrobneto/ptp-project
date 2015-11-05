@@ -76,8 +76,6 @@ int main() {
 			fscanf(arq_img, "%i %i %i", &img[i][j].r, &img[i][j].g, &img[i][j].b);
     // fecha o arquivo
 	fclose(arq_img);
-	printf("VOCE TEM Q BINARIZAR ESSA IMAGEM CARA!!!!\n");
-	binarizar(img);
-	cria_imagem(img, arq);
+	
     return 0;
 }
