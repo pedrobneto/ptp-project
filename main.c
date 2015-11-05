@@ -45,7 +45,7 @@ void binarizar (Cores img[lar][alt]) {
 
 int main() {
     // nome do arquivo sem extensão e nome do arquivo com extensão
-    char arq[50], arq_ext[50];
+    char arq[50], arq_ext[50], resp;
     // lê o nome do arquivo
     printf("Digite o nome do arquivo sem extensao: ");
     scanf("%s", arq);
@@ -76,6 +76,18 @@ int main() {
             fscanf(arq_img, "%i %i %i", &img[i][j].r, &img[i][j].g, &img[i][j].b);
     // fecha o arquivo
     fclose(arq_img);
+
+    do {
+        printf("Olá, deseja binarizar sua imagem? (S/N): ");
+        scanf(" %c", &resp);
+    } while (resp != 'S' && resp != 'N');
+
+    if(resp == 'S') {
+        binarizar(img);
+        cria_imagem(img, arq);
+        printf("Imagem binarizada com sucesso.\n");
+    }
+    printf("Programa finalizado\n");
     
     return 0;
 }
