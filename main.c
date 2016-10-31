@@ -5,7 +5,8 @@
 // cabeçalho do arquivo ppm
 #define cab "P3"
 
-// definir as cores
+// definir as cores no formato RGB. r para vermelho, g para verde e b para azul. 
+
 typedef struct {
     int r, g, b;
 } Cores;
